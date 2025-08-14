@@ -18,7 +18,7 @@ abstract class UserMapper
     {
         return new UserEntity(
             name: new Str($model->name),
-            email: new Email($model->email),
+            email: new Email(new Str($model->email)),
             password: new Password(password: new Str($model->password), hashed: false),
             id: new Id($model->id),
             emailConfirmedAt: $model->email_verified_at

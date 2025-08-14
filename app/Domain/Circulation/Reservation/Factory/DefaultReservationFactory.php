@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Circulation\Reservation\Factory;
 
 use App\Domain\Circulation\Reservation\Reservation;
 use App\Domain\Circulation\Reservation\Status\Implementation\Pending;
 use App\Domain\Shared\ValueObject\Id;
 
-abstract class ReservationFactory
+class DefaultReservationFactory implements ReservationFactoryInterface
 {
-    public static function build(Id $userId, Id $storedBookId): Reservation
+    public function build(Id $userId, Id $storedBookId): Reservation
     {
         return new Reservation(
             userId: $userId,

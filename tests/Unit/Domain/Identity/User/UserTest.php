@@ -22,16 +22,62 @@ class UserTest extends TestCase
 
         $this->assertEquals('John Doe', $user->getName()->getValue());
         $this->assertEquals('ilovelaravel@gmail.com', $user->getEmail()->getValue());
-        $this->assertTrue($user->getPassword()->match(new Str('ValidPassword1!')));
+        $this->assertTrue($user->getPassword()->match(new Str('ValidPassword1!@')));
 
         $this->assertNull($user->getId());
         $this->assertNull($user->getEmailConfirmedAt());
     }
 
     #[Test]
-    public function itShouldAllowUserToChangeName(): void {}
+    public function itShouldAllowUserToChangeName(): void
+    {
+        $user = UserFactory::build(
+            name: new Str('John Doe'),
+            email: new Email(new Str('ilovelaravel@gmail.com')),
+            password: new Password(password: new Str('ValidPassword1!@'))
+        );
 
-    public function itShouldAllowUserToChangeEmail(): void {}
+        $user->changeNameTo(new Str('Doe John'));
 
-    public function itShouldAllowUserToChangePassword(): void {}
+        $this->assertNotEquals('John Doe', $user->getName()->getValue());
+        $this->assertEquals('Doe John', $user->getName()->getValue());
+    }
+
+    #[Test]
+    public function itShouldAllowUserToChangeEmail(): void
+    {
+        $user = UserFactory::build(
+            name: new Str('John Doe'),
+            email: new Email(new Str('ilovelaravel@gmail.com')),
+            password: new Password(password: new Str('ValidPassword1!@'))
+        );
+
+        $user->changeEmailTo(
+            new Email(
+                new Str('ilovephp@gmail.com')
+            )
+        );
+
+        $this->assertNotEquals('ilovelaravel@gmail.com', $user->getEmail()->getValue());
+        $this->assertEquals('ilovephp@gmail.com', $user->getEmail()->getValue());
+    }
+
+    #[Test]
+    public function itShouldAllowUserToChangePassword(): void
+    {
+        $user = UserFactory::build(
+            name: new Str('John Doe'),
+            email: new Email(new Str('ilovelaravel@gmail.com')),
+            password: new Password(password: new Str('ValidPassword1!@'))
+        );
+
+        $user->changePasswordTo(
+            new Password(
+                password: new Str('CHzEe4scoy@ASD_')
+            )
+        );
+
+        $this->assertFalse($user->getPassword()->match(new Str('ValidPassword1!@')));
+        $this->assertTrue($user->getPassword()->match(new Str('CHzEe4scoy@ASD_')));
+    }
 }

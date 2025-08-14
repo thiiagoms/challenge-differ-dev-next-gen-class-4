@@ -2,8 +2,9 @@
 
 namespace Tests\Unit\Domain\Circulation\Reservation;
 
-use App\Domain\Circulation\Reservation\Factory\ReservationFactory;
+use App\Domain\Circulation\Reservation\Reservation;
 use App\Domain\Circulation\Reservation\Status\Exception\InvalidReservationStatusTransitionException;
+use App\Domain\Circulation\Reservation\Status\Implementation\Pending;
 use App\Domain\Circulation\Reservation\Status\Status;
 use App\Domain\Shared\ValueObject\Id;
 use PHPUnit\Framework\Attributes\Test;
@@ -17,9 +18,11 @@ class ReservationTest extends TestCase
         $userId = new Id(rand(1, 1999));
         $storedBookId = new Id(rand(1, 1999));
 
-        $reservation = ReservationFactory::build(
+        $reservation = new Reservation(
             userId: $userId,
             storedBookId: $storedBookId,
+            status: new Pending,
+            reservedAt: new \DateTimeImmutable
         );
 
         $this->assertEquals($userId, $reservation->getUserId());
@@ -35,9 +38,11 @@ class ReservationTest extends TestCase
     #[Test]
     public function itShouldAllowReturnReservationWithPendingStatus(): void
     {
-        $reservation = ReservationFactory::build(
+        $reservation = new Reservation(
             userId: new Id(rand(1, 1999)),
             storedBookId: new Id(rand(1, 1999)),
+            status: new Pending,
+            reservedAt: new \DateTimeImmutable
         );
 
         $reservation->return();
@@ -49,9 +54,11 @@ class ReservationTest extends TestCase
     #[Test]
     public function itShouldThrowExceptionWhenReservationIsAlreadyReturned(): void
     {
-        $reservation = ReservationFactory::build(
+        $reservation = new Reservation(
             userId: new Id(rand(1, 1999)),
             storedBookId: new Id(rand(1, 1999)),
+            status: new Pending,
+            reservedAt: new \DateTimeImmutable
         );
 
         $reservation->return();

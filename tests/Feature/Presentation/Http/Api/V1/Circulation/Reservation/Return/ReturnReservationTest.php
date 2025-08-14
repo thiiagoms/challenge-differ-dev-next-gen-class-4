@@ -2,10 +2,10 @@
 
 namespace Feature\Presentation\Http\Api\V1\Circulation\Reservation\Return;
 
-use App\Models\Book as LaravelBookModel;
-use App\Models\Reservation as LaravelReservationModel;
-use App\Models\StoredBook as LaravelStoredBookModel;
-use App\Models\User as LaravelUserModel;
+use App\Infrastructure\Persistence\Models\Book as LaravelBookModel;
+use App\Infrastructure\Persistence\Models\Reservation as LaravelReservationModel;
+use App\Infrastructure\Persistence\Models\StoredBook as LaravelStoredBookModel;
+use App\Infrastructure\Persistence\Models\User as LaravelUserModel;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Testing\Fluent\AssertableJson;
 use PHPUnit\Framework\Attributes\Test;

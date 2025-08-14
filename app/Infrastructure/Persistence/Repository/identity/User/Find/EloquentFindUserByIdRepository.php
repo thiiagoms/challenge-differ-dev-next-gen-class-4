@@ -7,6 +7,7 @@ namespace App\Infrastructure\Persistence\Repository\identity\User\Find;
 use App\Domain\Identity\User\Repository\Find\FindUserByIdRepositoryInterface;
 use App\Domain\Identity\User\User;
 use App\Domain\Shared\ValueObject\Id;
+use App\Infrastructure\Persistence\Mappers\Identity\User\UserMapper;
 use App\Infrastructure\Persistence\Repository\identity\User\BaseUserRepository;
 
 final class EloquentFindUserByIdRepository extends BaseUserRepository implements FindUserByIdRepositoryInterface

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Circulation\Reservation;
 
+use App\Domain\Circulation\Reservation\Exception\ReturnReservationDateIsInvalidException;
 use App\Domain\Circulation\Reservation\Status\Interface\StatusInterface;
 use App\Domain\Circulation\Reservation\Status\Status;
 use App\Domain\Shared\ValueObject\Id;
@@ -71,10 +72,21 @@ final class Reservation
         return $this->updatedAt;
     }
 
-    public function return(): void
+    /**
+     * @throws ReturnReservationDateIsInvalidException
+     */
+    public function return(DateTimeImmutable $returnDate): void
     {
+        if ($this->returnedAt <= $returnDate) {
+            throw ReturnReservationDateIsInvalidException::create();
+        }
+
+        if ($this->getStatus()->isReturned()) {
+            throw ReturnReservationDateIsInvalidException::create();
+        }
+
         $this->status->returned($this);
-        $this->returnedAt = new DateTimeImmutable;
+        $this->returnedAt = $returnDate;
         $this->touch();
     }
 

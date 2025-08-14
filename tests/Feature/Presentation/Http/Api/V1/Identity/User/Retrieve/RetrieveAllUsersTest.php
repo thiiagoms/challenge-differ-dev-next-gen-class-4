@@ -2,7 +2,7 @@
 
 namespace Feature\Presentation\Http\Api\V1\Identity\User\Retrieve;
 
-use App\Models\User as LaravelUserModel;
+use App\Infrastructure\Persistence\Models\User as LaravelUserModel;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Testing\Fluent\AssertableJson;
 use PHPUnit\Framework\Attributes\Test;

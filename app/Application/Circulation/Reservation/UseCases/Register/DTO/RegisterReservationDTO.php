@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Application\Circulation\Reservation\UseCases\Register\DTO;
 
-use App\Application\Circulation\UseCases\Reservation\Register\DTO\RegisterReservationApiRequest;
 use App\Domain\Shared\ValueObject\Id;
+use App\Presentation\Http\Api\V1\Reservation\Register\Request\RegisterReservationApiRequest;
 
 class RegisterReservationDTO
 {
@@ -25,6 +25,9 @@ class RegisterReservationDTO
     {
         $payload = $request->validated();
 
-        return new self(userId: new Id($payload['user_id']), storedBookId: new Id($payload['stored_book_id']));
+        return new self(
+            userId: new Id($payload['user_id']),
+            storedBookId: new Id($payload['stored_book_id'])
+        );
     }
 }

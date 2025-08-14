@@ -1,19 +1,17 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Infrastructure\Persistence\Models;
 
+use App\Infrastructure\Persistence\Models\Reservation as LaravelReservationModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends Factory<LaravelReservationModel>
  */
 class ReservationFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = LaravelReservationModel::class;
+
     public function definition(): array
     {
         return [

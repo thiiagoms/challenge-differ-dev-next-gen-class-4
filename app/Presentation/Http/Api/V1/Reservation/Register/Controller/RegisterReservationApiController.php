@@ -2,10 +2,15 @@
 
 namespace App\Presentation\Http\Api\V1\Reservation\Register\Controller;
 
+use App\Application\Circulation\Reservation\UseCases\Register\DTO\RegisterReservationDTO;
 use App\Application\Circulation\Reservation\UseCases\Register\RegisterReservation;
+use App\Application\Identity\User\Exception\UserNotFoundException;
+use App\Application\Inventory\StoredBook\Exception\StoredBookNotFoundException;
 use App\Http\Controllers\Controller;
+use App\Presentation\Http\Api\V1\Reservation\Register\Request\RegisterReservationApiRequest;
 use App\Presentation\Http\Api\V1\Reservation\Resource\ReservationResource;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class RegisterReservationApiController extends Controller
 {

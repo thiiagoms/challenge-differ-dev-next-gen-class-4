@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Infrastructure\Persistence\Mappers\Inventory\StoredBook;
 
 use App\Domain\Inventory\StoredBook\StoredBook as StoredBookEntity;
