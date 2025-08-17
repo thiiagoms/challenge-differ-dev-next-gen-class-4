@@ -24,6 +24,8 @@ return Application::configure(basePath: dirname(__DIR__))
                 data: ['error' => $e->getMessage()], status: Response::HTTP_NOT_FOUND),
             $e instanceof ForbiddenException => response()->json(
                 data: ['error' => $e->getMessage()], status: Response::HTTP_FORBIDDEN),
-            default => dd($e)
+            default => response()->json(
+                data: ['error' => 'Something went wrong'], status: Response::HTTP_INTERNAL_SERVER_ERROR
+            )
         });
     })->create();

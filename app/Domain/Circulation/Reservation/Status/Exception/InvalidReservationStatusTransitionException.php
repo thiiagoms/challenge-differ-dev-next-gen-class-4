@@ -2,23 +2,17 @@
 
 namespace App\Domain\Circulation\Reservation\Status\Exception;
 
-use App\Domain\Circulation\Reservation\Status\Status;
+use App\Application\Shared\Exception\ForbiddenException;
 
-class InvalidReservationStatusTransitionException extends \DomainException
+class InvalidReservationStatusTransitionException extends ForbiddenException
 {
     public function __construct(string $message)
     {
         parent::__construct($message);
     }
 
-    public static function create(Status $from, Status $to): self
+    public static function create(string $message): self
     {
-        $message = sprintf(
-            "Invalid reservation status transition from '%s' to '%s' for reservation.",
-            $from->value,
-            $to->value,
-        );
-
-        return new self($message);
+        return new self(message: $message);
     }
 }

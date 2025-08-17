@@ -11,10 +11,7 @@ class Pending implements StatusInterface
 {
     public function pending(Reservation $reservation): void
     {
-        throw InvalidReservationStatusTransitionException::create(
-            from: Status::PENDING,
-            to: Status::PENDING,
-        );
+        throw InvalidReservationStatusTransitionException::create('Your reservation is still pending');
     }
 
     public function returned(Reservation $reservation): void

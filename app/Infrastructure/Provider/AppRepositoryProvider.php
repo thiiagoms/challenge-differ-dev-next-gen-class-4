@@ -4,10 +4,14 @@ namespace App\Infrastructure\Provider;
 
 use App\Domain\Circulation\Reservation\Repository\Find\FindReservationByIdRepositoryInterface;
 use App\Domain\Circulation\Reservation\Repository\Register\RegisterReservationRepositoryInterface;
+use App\Domain\Circulation\Reservation\Repository\Update\UpdateReservationRepositoryInterface;
+use App\Domain\Identity\User\Repository\All\ReturnAllUsersRepositoryInterface;
 use App\Domain\Identity\User\Repository\Find\FindUserByIdRepositoryInterface;
 use App\Domain\Inventory\StoredBook\Repository\Find\FindStoredBookByIdRepositoryInterface;
 use App\Infrastructure\Persistence\Repository\Circulation\Reservation\Find\EloquentFindReservationByIdRepository;
 use App\Infrastructure\Persistence\Repository\Circulation\Reservation\Register\EloquentRegisterReservationRepository;
+use App\Infrastructure\Persistence\Repository\Circulation\Reservation\Update\EloquentUpdateReservationRepository;
+use App\Infrastructure\Persistence\Repository\identity\User\All\EloquentGetAllUsersRepository;
 use App\Infrastructure\Persistence\Repository\identity\User\Find\EloquentFindUserByIdRepository;
 use App\Infrastructure\Persistence\Repository\Inventory\StoredBook\Find\EloquentFindStoredBookByIdRepository;
 use Illuminate\Support\ServiceProvider;
@@ -26,6 +30,11 @@ class AppRepositoryProvider extends ServiceProvider
         $this->app->bind(
             abstract: FindUserByIdRepositoryInterface::class,
             concrete: EloquentFindUserByIdRepository::class
+        );
+
+        $this->app->bind(
+            abstract: ReturnAllUsersRepositoryInterface::class,
+            concrete: EloquentGetAllUsersRepository::class
         );
     }
 
@@ -47,6 +56,11 @@ class AppRepositoryProvider extends ServiceProvider
         $this->app->bind(
             abstract: FindREservationByIdRepositoryInterface::class,
             concrete: EloquentFindReservationByIdRepository::class
+        );
+
+        $this->app->bind(
+            abstract: UpdateReservationRepositoryInterface::class,
+            concrete: EloquentUpdateReservationRepository::class
         );
     }
 

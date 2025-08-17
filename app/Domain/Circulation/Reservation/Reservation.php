@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Domain\Circulation\Reservation;
 
 use App\Domain\Circulation\Reservation\Exception\ReturnReservationDateIsInvalidException;
+use App\Domain\Circulation\Reservation\Status\Exception\InvalidReservationStatusTransitionException;
 use App\Domain\Circulation\Reservation\Status\Interface\StatusInterface;
 use App\Domain\Circulation\Reservation\Status\Status;
 use App\Domain\Shared\ValueObject\Id;
+use App\Domain\Shared\ValueObject\Money;
 use DateTimeImmutable;
 
 final class Reservation
@@ -74,20 +76,40 @@ final class Reservation
 
     /**
      * @throws ReturnReservationDateIsInvalidException
+     * @throws InvalidReservationStatusTransitionException
      */
     public function return(DateTimeImmutable $returnDate): void
     {
-        if ($this->returnedAt <= $returnDate) {
-            throw ReturnReservationDateIsInvalidException::create();
-        }
-
-        if ($this->getStatus()->isReturned()) {
+        if ($returnDate <= $this->reservedAt) {
             throw ReturnReservationDateIsInvalidException::create();
         }
 
         $this->status->returned($this);
         $this->returnedAt = $returnDate;
         $this->touch();
+    }
+
+    public function reservationHasBeenReturned(): bool
+    {
+        return $this->returnedAt !== null;
+    }
+
+    public function getReservedDays(?DateTimeImmutable $calculationDate = null): int
+    {
+        $end = $this->reservationHasBeenReturned()
+            ? $this->returnedAt
+            : ($calculationDate ?? new DateTimeImmutable);
+
+        $startDay = $this->reservedAt->setTime(0, 0);
+
+        $endDay = $end->setTime(0, 0);
+
+        return $endDay <= $startDay ? 0 : $endDay->diff($startDay)->days;
+    }
+
+    public function calculateDailyRate(Money $tax, ?DateTimeImmutable $calculationDate = null): Money
+    {
+        return $tax->multiply($this->getReservedDays($calculationDate));
     }
 
     /**

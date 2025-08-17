@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Infrastructure\Persistence\Models;
 
+use App\Infrastructure\Persistence\Models\Book as LaravelBookModel;
 use App\Infrastructure\Persistence\Models\StoredBook as LaravelStoredBookModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -15,7 +16,7 @@ class StoredBookFactory extends Factory
     public function definition(): array
     {
         return [
-            'book_id' => rand(1, 10),
+            'book_id' => LaravelBookModel::factory()->createOne(),
         ];
     }
 }

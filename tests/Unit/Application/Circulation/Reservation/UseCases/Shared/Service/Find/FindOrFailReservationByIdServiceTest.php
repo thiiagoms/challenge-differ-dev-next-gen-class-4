@@ -3,7 +3,6 @@
 namespace Tests\Unit\Application\Circulation\Reservation\UseCases\Shared\Service\Find;
 
 use App\Application\Circulation\Reservation\Exception\ReservationNotFoundException;
-use App\Application\Circulation\Reservation\UseCases\Guard\GuardReservationExists;
 use App\Application\Circulation\Reservation\UseCases\Shared\Service\Find\FindOrFailReservationByIdService;
 use App\Domain\Circulation\Reservation\Repository\Find\FindReservationByIdRepositoryInterface;
 use App\Domain\Circulation\Reservation\Reservation;
@@ -49,8 +48,6 @@ class FindOrFailReservationByIdServiceTest extends TestCase
                     id: $this->id
                 )
             );
-
-        $this->expectNotToPerformAssertions();
 
         $reservation = $this->service->findOrFail($this->id);
 

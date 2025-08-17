@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Presentation\Http\Api\V1\Reservation\Resource;
+namespace App\Presentation\Http\Api\V1\Reservation\Shared\Resource;
 
 use App\Domain\Circulation\Reservation\Reservation;
 use Illuminate\Contracts\Support\Arrayable;

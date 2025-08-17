@@ -3,6 +3,9 @@
 namespace Database\Factories\Infrastructure\Persistence\Models;
 
 use App\Infrastructure\Persistence\Models\Reservation as LaravelReservationModel;
+use App\Infrastructure\Persistence\Models\StoredBook as LaravelStoredBookModel;
+use App\Infrastructure\Persistence\Models\User as LaravelUserModel;
+use DateTimeImmutable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -12,13 +15,18 @@ class ReservationFactory extends Factory
 {
     protected $model = LaravelReservationModel::class;
 
+    /**
+     * @throws \DateMalformedStringException
+     */
     public function definition(): array
     {
         return [
-            'stored_book_id' => rand(1, 10),
-            'user_id' => rand(1, 10),
-            'reserved_at' => $this->faker->dateTimeBetween('-60 days', '-30 days'),
-            'returned_at' => $this->faker->dateTimeBetween('-30 days', '-10 days'),
+            'stored_book_id' => LaravelStoredBookModel::factory()->createOne(),
+            'user_id' => LaravelUserModel::factory()->createOne(),
+            'reserved_at' => (new DateTimeImmutable(sprintf('-%d days', rand(30, 60))))
+                ->format('Y-m-d H:i:s'),
+            'returned_at' => (new DateTimeImmutable(sprintf('-%d days', rand(10, 30))))
+                ->format('Y-m-d H:i:s'),
         ];
     }
 }
