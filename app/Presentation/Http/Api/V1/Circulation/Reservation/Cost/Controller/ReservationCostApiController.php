@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Presentation\Http\Api\V1\Reservation\Cost\Controller;
+namespace App\Presentation\Http\Api\V1\Circulation\Reservation\Cost\Controller;
 
 use App\Application\Circulation\Reservation\Exception\ReservationNotFoundException;
 use App\Application\Circulation\Reservation\UseCases\Cost\GetReservationCost;
 use App\Domain\Shared\ValueObject\Id;
 use App\Http\Controllers\Controller;
-use App\Presentation\Http\Api\V1\Reservation\Cost\Request\ReservationCostApiRequest;
-use App\Presentation\Http\Api\V1\Reservation\Cost\Resource\ReservationCostResource;
+use App\Presentation\Http\Api\V1\Circulation\Reservation\Cost\Request\ReservationCostApiRequest;
+use App\Presentation\Http\Api\V1\Circulation\Reservation\Cost\Resource\ReservationCostResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 

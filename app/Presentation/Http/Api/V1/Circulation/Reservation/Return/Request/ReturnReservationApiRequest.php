@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Presentation\Http\Api\V1\Reservation\Register\Request;
+namespace App\Presentation\Http\Api\V1\Circulation\Reservation\Return\Request;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterReservationApiRequest extends FormRequest
+class ReturnReservationApiRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -14,13 +14,13 @@ class RegisterReservationApiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => [
+            'reservation_id' => [
                 'required',
                 'integer',
             ],
-            'stored_book_id' => [
+            'return_date' => [
                 'required',
-                'integer',
+                'string',
             ],
         ];
     }

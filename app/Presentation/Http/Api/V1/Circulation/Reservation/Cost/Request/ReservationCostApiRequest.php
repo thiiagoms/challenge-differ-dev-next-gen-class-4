@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Presentation\Http\Api\V1\Reservation\Cost\Request;
+namespace App\Presentation\Http\Api\V1\Circulation\Reservation\Cost\Request;
 
 use Illuminate\Foundation\Http\FormRequest;
 

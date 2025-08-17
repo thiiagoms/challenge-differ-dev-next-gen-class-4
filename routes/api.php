@@ -1,11 +1,9 @@
 <?php
 
-use App\Http\Controllers\ReservationsController;
-use App\Http\Controllers\UsersController;
+use App\Presentation\Http\Api\V1\Circulation\Reservation\Cost\Controller\ReservationCostApiController;
+use App\Presentation\Http\Api\V1\Circulation\Reservation\Register\Controller\RegisterReservationApiController;
+use App\Presentation\Http\Api\V1\Circulation\Reservation\Return\Controller\ReturnReservationApiController;
 use App\Presentation\Http\Api\V1\Identity\User\All\Controller\RetrieveAllUsersApiController;
-use App\Presentation\Http\Api\V1\Reservation\Cost\Controller\ReservationCostApiController;
-use App\Presentation\Http\Api\V1\Reservation\Register\Controller\RegisterReservationApiController;
-use App\Presentation\Http\Api\V1\Reservation\Return\Controller\ReturnReservationApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

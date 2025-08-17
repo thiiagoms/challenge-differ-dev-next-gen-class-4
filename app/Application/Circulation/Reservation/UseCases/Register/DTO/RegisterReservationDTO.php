@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Application\Circulation\Reservation\UseCases\Register\DTO;
 
 use App\Domain\Shared\ValueObject\Id;
-use App\Presentation\Http\Api\V1\Reservation\Register\Request\RegisterReservationApiRequest;
+use App\Presentation\Http\Api\V1\Circulation\Reservation\Register\Request\RegisterReservationApiRequest;
 
 class RegisterReservationDTO
 {

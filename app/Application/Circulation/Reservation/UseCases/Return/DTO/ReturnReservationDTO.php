@@ -3,7 +3,7 @@
 namespace App\Application\Circulation\Reservation\UseCases\Return\DTO;
 
 use App\Domain\Shared\ValueObject\Id;
-use App\Presentation\Http\Api\V1\Reservation\Return\Request\ReturnReservationApiRequest;
+use App\Presentation\Http\Api\V1\Circulation\Reservation\Return\Request\ReturnReservationApiRequest;
 use DateTimeImmutable;
 
 final readonly class ReturnReservationDTO

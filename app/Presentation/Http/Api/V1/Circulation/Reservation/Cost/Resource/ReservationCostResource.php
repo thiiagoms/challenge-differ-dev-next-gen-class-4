@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Presentation\Http\Api\V1\Reservation\Cost\Resource;
+namespace App\Presentation\Http\Api\V1\Circulation\Reservation\Cost\Resource;
 
 use App\Application\Circulation\Reservation\UseCases\Cost\DTO\CostReservationDTO;
-use App\Presentation\Http\Api\V1\Reservation\Shared\Resource\ReservationResource;
+use App\Presentation\Http\Api\V1\Circulation\Reservation\Shared\Resource\ReservationResource;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
