@@ -228,6 +228,6 @@ class ReturnReservationTest extends TestCase
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Failed to update reservation in the database');
 
-        $reservation = $this->returnReservation->complete($dto);
+        $this->returnReservation->complete($dto);
     }
 }
