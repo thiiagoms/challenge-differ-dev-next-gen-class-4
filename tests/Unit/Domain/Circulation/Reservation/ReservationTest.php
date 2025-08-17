@@ -112,7 +112,7 @@ class ReservationTest extends TestCase
         $reservation->return($returnedAtDate);
 
         $this->expectException(InvalidReservationStatusTransitionException::class);
-        $this->expectExceptionMessage('Reservation already returne');
+        $this->expectExceptionMessage('Reservation already returned');
 
         $reservation->return($returnedAtDate);
     }

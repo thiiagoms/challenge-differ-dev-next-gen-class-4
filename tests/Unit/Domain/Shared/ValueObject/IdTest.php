@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Domain\Common\ValueObject;
+namespace Tests\Unit\Domain\Shared\ValueObject;
 
 use App\Domain\Shared\ValueObject\Id;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -31,7 +31,7 @@ class IdTest extends TestCase
 
     #[Test]
     #[DataProvider('invalidIdCases')]
-    public function itShouldThrowExceptionWhenIdIsInvaid(int $id): void
+    public function itShouldThrowExceptionWhenIdIsInvalid(int $id): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage("Invalid id provided: '{$id}'");

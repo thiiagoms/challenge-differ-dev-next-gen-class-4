@@ -49,7 +49,7 @@ class ReturnReservationTest extends TestCase
     public function itShouldUpdateReservationStatusToReturned(): void
     {
         $dto = new ReturnReservationDTO(
-            id: new Id(302, 400),
+            id: new Id(302),
             returnDate: (new \DateTimeImmutable)->modify('+3 days')
         );
 
@@ -94,7 +94,7 @@ class ReturnReservationTest extends TestCase
     public function itShouldThrowExceptionWhenReservationNotFound(): void
     {
         $dto = new ReturnReservationDTO(
-            id: new Id(302, 400),
+            id: new Id(302),
             returnDate: (new \DateTimeImmutable)->modify('+3 days')
         );
 
@@ -123,7 +123,7 @@ class ReturnReservationTest extends TestCase
     public function itShouldThrowExceptionWhenReturnDateIsInvalid(): void
     {
         $dto = new ReturnReservationDTO(
-            id: new Id(302, 400),
+            id: new Id(302),
             returnDate: (new \DateTimeImmutable)->modify('-3 days')
         );
 
@@ -161,7 +161,7 @@ class ReturnReservationTest extends TestCase
     public function itShouldThrowExceptionWhenReservationIsAlreadyReturned(): void
     {
         $dto = new ReturnReservationDTO(
-            id: new Id(302, 400),
+            id: new Id(302),
             returnDate: (new \DateTimeImmutable)->modify('+3 days')
         );
 
@@ -200,7 +200,7 @@ class ReturnReservationTest extends TestCase
     public function itShouldThrowExceptionWhenRepositoryFailsToUpdateReservation(): void
     {
         $dto = new ReturnReservationDTO(
-            id: new Id(302, 400),
+            id: new Id(302),
             returnDate: (new \DateTimeImmutable)->modify('+3 days')
         );
 

@@ -54,7 +54,7 @@ class AppRepositoryProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            abstract: FindREservationByIdRepositoryInterface::class,
+            abstract: FindReservationByIdRepositoryInterface::class,
             concrete: EloquentFindReservationByIdRepository::class
         );
 

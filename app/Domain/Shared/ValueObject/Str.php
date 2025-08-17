@@ -10,7 +10,7 @@ final readonly class Str
 
     public function __construct(string $value)
     {
-        $vaue = Sanitizer::clean($value);
+        $value = Sanitizer::clean($value);
 
         $this->validate($value);
 

@@ -95,7 +95,7 @@ class RegisterReservationTest extends TestCase
                     storedBookId: $this->dto->getStoredBookId(),
                     status: new Pending,
                     reservedAt: $reservation->getReservedAt(),
-                    id: new Id(100, 1000),
+                    id: new Id(100),
                     createdAt: $reservation->getCreatedAt(),
                     updatedAt: $reservation->getUpdatedAt()
                 )

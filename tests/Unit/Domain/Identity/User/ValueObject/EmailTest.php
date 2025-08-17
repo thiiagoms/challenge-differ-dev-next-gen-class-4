@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 class EmailTest extends TestCase
 {
     #[Test]
-    public function itShouldCreateAndEmail(): void
+    public function itShouldCreateAnEmail(): void
     {
         $email = new Email(new Str('ilovephp@gmail.com'));
 

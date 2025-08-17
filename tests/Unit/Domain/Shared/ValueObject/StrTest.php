@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Domain\Common\ValueObject;
+namespace Tests\Unit\Domain\Shared\ValueObject;
 
 use App\Domain\Shared\ValueObject\Str;
 use PHPUnit\Framework\Attributes\Test;
