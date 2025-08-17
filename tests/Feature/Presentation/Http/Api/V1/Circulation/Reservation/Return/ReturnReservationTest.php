@@ -1,11 +1,11 @@
 <?php
 
-namespace Feature\Presentation\Http\Api\V1\Circulation\Reservation\Return;
+namespace Tests\Feature\Presentation\Http\Api\V1\Circulation\Reservation\Return;
 
-use App\Models\Book as LaravelBookModel;
-use App\Models\Reservation as LaravelReservationModel;
-use App\Models\StoredBook as LaravelStoredBookModel;
-use App\Models\User as LaravelUserModel;
+use App\Infrastructure\Persistence\Models\Book as LaravelBookModel;
+use App\Infrastructure\Persistence\Models\Reservation as LaravelReservationModel;
+use App\Infrastructure\Persistence\Models\StoredBook as LaravelStoredBookModel;
+use App\Infrastructure\Persistence\Models\User as LaravelUserModel;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Testing\Fluent\AssertableJson;
 use PHPUnit\Framework\Attributes\Test;
@@ -78,12 +78,12 @@ class ReturnReservationTest extends TestCase
     }
 
     #[Test]
-    public function itShouldNotAllowToReturnAReservationWhenItIsNotReserved(): void
+    public function itShouldNotAllowToReturnAReservationWhenReservationDoesNotExists(): void
     {
         $this
             ->postJson(self::RETURN_RESERVATION_ENDPOINT, [
                 'reservation_id' => 9999,
-                'return_date' => '',
+                'return_date' => (new \DateTimeImmutable)->format('Y-m-d H:i:s'),
             ])
             ->assertNotFound()
             ->assertJson(fn (AssertableJson $json): AssertableJson => $json
@@ -114,7 +114,7 @@ class ReturnReservationTest extends TestCase
         $this
             ->postJson(self::RETURN_RESERVATION_ENDPOINT, [
                 'reservation_id' => $reservation->id,
-                'return_date' => '',
+                'return_date' => (new \DateTimeImmutable)->format('Y-m-d H:i:s'),
             ])
             ->assertForbidden()
             ->assertJson(fn (AssertableJson $json): AssertableJson => $json
@@ -155,11 +155,5 @@ class ReturnReservationTest extends TestCase
                 ->whereType('error', 'string')
                 ->where('error', 'Return date must be greater than reserved date')
             );
-    }
-
-    #[Test]
-    public function itShouldThrowErrorWhenSaveReturnDate(): void
-    {
-        // TODO: Think about this test scenario
     }
 }

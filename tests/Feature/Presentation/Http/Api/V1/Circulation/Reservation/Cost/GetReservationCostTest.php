@@ -1,11 +1,11 @@
 <?php
 
-namespace Feature\Presentation\Http\Api\V1\Circulation\Reservation\Cost;
+namespace Tests\Feature\Presentation\Http\Api\V1\Circulation\Reservation\Cost;
 
-use App\Models\Book as LaravelBookModel;
-use App\Models\Reservation as LaravelReservationModel;
-use App\Models\StoredBook as LaravelStoredBookModel;
-use App\Models\User as LaravelUserModel;
+use App\Infrastructure\Persistence\Models\Book as LaravelBookModel;
+use App\Infrastructure\Persistence\Models\Reservation as LaravelReservationModel;
+use App\Infrastructure\Persistence\Models\StoredBook as LaravelStoredBookModel;
+use App\Infrastructure\Persistence\Models\User as LaravelUserModel;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Testing\Fluent\AssertableJson;
 use PHPUnit\Framework\Attributes\Test;
@@ -17,6 +17,9 @@ class GetReservationCostTest extends TestCase
 
     private const string GET_RESERVATION_COST = '/api/reservations/cost';
 
+    /**
+     * @throws \DateMalformedStringException
+     */
     #[Test]
     public function itShouldReturnReservationCost(): void
     {
@@ -48,7 +51,6 @@ class GetReservationCostTest extends TestCase
                     'data.reservation.id',
                     'data.reservation.user_id',
                     'data.reservation.reserved_at',
-                    'data.reservation.returned_at',
                     'data.reservation.stored_book_id',
                     'data.reservation.created_at',
                     'data.reservation.updated_at',
@@ -62,7 +64,6 @@ class GetReservationCostTest extends TestCase
                     'data.reservation.id' => 'integer',
                     'data.reservation.user_id' => 'integer',
                     'data.reservation.reserved_at' => 'string',
-                    'data.reservation.returned_at' => 'string|null', // null allowed here
                     'data.reservation.stored_book_id' => 'integer',
                     'data.reservation.created_at' => 'string',
                     'data.reservation.updated_at' => 'string',

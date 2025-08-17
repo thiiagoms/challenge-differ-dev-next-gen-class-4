@@ -47,7 +47,8 @@ class ReservationsController extends Controller
 
         $returnDate = $request->input('return_date');
         if ($returnDate <= $reservation->reserved_at) {
-            return response()->json(['error' => 'Return date must be greater than reserved date'], 403);
+            return response()->json(
+                ['error' => 'Return date must be greater than reserved date'], 403);
         }
 
         $reservation->returned_at = $returnDate;

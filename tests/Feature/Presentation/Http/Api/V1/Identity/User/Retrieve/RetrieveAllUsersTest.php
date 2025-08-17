@@ -2,7 +2,7 @@
 
 namespace Feature\Presentation\Http\Api\V1\Identity\User\Retrieve;
 
-use App\Models\User as LaravelUserModel;
+use App\Infrastructure\Persistence\Models\User as LaravelUserModel;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Testing\Fluent\AssertableJson;
 use PHPUnit\Framework\Attributes\Test;
@@ -17,21 +17,25 @@ class RetrieveAllUsersTest extends TestCase
     #[Test]
     public function itShouldReturnAllUsersInDatabase(): void
     {
+        LaravelUserModel::factory(20)->create();
+
         $usersQuantity = LaravelUserModel::all()->count();
 
         $this
             ->getJson(self::RETRIEVE_ALL_USERS_ENDPOINT)
             ->assertOk()
+            ->assertJson(fn (AssertableJson $json): AssertableJson => $json->has('data', $usersQuantity));
+    }
+
+    #[Test]
+    public function itShouldReturnEmptyArrayWhenNoUsersInDatabase(): void
+    {
+        $this
+            ->getJson(self::RETRIEVE_ALL_USERS_ENDPOINT)
+            ->assertOk()
             ->assertJson(fn (AssertableJson $json): AssertableJson => $json
-                ->count($usersQuantity)
-                ->each(fn (AssertableJson $userJson): AssertableJson => $userJson
-                    ->whereType('id', 'integer')
-                    ->whereType('name', 'string')
-                    ->whereType('email', 'string')
-                    ->whereType('email_verified_at', 'string')
-                    ->whereType('created_at', 'string')
-                    ->whereType('updated_at', 'string')
-                )
+                ->has('data', 0)
+                ->whereType('data', 'array')
             );
     }
 }

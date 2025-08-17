@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\StoredBook;
-use App\Models\User;
+use App\Infrastructure\Persistence\Models\StoredBook as LaravelStoredBookModel;
+use App\Infrastructure\Persistence\Models\User as LaravelUserModel;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
-            $table->foreignIdFor(StoredBook::class);
+            $table->foreignIdFor(LaravelUserModel::class);
+            $table->foreignIdFor(LaravelStoredBookModel::class);
             $table->dateTime('reserved_at')->useCurrent();
             $table->dateTime('returned_at')->nullable();
             $table->timestamps();
