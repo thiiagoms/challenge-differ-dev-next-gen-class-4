@@ -7,6 +7,7 @@ namespace App\Infrastructure\Persistence\Mappers\Inventory\StoredBook;
 use App\Domain\Inventory\StoredBook\StoredBook as StoredBookEntity;
 use App\Domain\Shared\ValueObject\Id;
 use App\Infrastructure\Persistence\Models\StoredBook as LaravelStoredBookModel;
+use Carbon\Carbon;
 
 abstract class StoredBookMapper
 {
